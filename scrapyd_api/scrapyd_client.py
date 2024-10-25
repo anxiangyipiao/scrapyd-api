@@ -88,6 +88,32 @@ class ScrapydClient(ScrapydAPI):
     #####################################################
 
     def job_status(self, project, job):
+        """
+        查询任务状态
+        
+        Args:
+            project (str): 项目名称
+            job (str): 任务ID
+        
+        Returns:
+            dict: 返回指定任务的状态信息，如果任务不存在，则抛出异常
+        
+        Raises:
+            ScrapydException: 如果找不到指定的任务，则抛出此异常
+        """
+        """
+        查询任务状态
+        
+        Args:
+            project (str): 项目名称
+            job (str): 任务ID
+        
+        Returns:
+            dict: 返回指定任务的状态信息，如果任务不存在，则抛出异常
+        
+        Raises:
+            ScrapydException: 如果找不到指定的任务，则抛出此异常
+        """
         """查询任务状态"""
         res = self.list_jobs_merge(project=project)
         for item in res:
@@ -111,11 +137,16 @@ class ScrapydClient(ScrapydAPI):
     def list_jobs_merge(self, project, status=None):
         """
         合并后的任务列表
-        :param status: pending、running、finished
-        :param project:
-        :return: list
+        
+        Args:
+            project (str): 项目名
+            status (str, optional): 任务状态，默认为None。可选值包括'pending'、'running'、'finished'。
+        
+        Returns:
+            dict: 包含任务列表、总任务数、待处理任务数、正在执行任务数和已完成任务数的字典。
+        
         """
-
+       
         res = super().list_jobs(project=project)
 
         lst = []
